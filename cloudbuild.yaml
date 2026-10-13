@@ -49,8 +49,8 @@ steps:
 
 substitutions:
   _REGION: asia-south1
-  _REPOSITORY: chat-service-repo
-  _SERVICE: chat-service
+  _REPOSITORY: a-new-chat-app-repo
+  _SERVICE: a-new-chat-app
 
 # Record the image in the build results; BUILD_ID gives each build its own tag.
 images:
