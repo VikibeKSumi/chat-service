@@ -4,8 +4,8 @@
 steps:
   # Re-run tests on the actual main-branch source before building a release.
   - id: unit-tests
-    name: python:3.11-slim
     entrypoint: sh
+    name: python:3.11-slim
     args:
       - -c
       - |
@@ -33,9 +33,9 @@ steps:
 
   # Preserve existing secrets, runtime identity, scaling and access settings.
   - id: deploy
+    entrypoint: gcloud
     waitFor: ['push']
     name: gcr.io/google.com/cloudsdktool/cloud-sdk:slim
-    entrypoint: gcloud
     args:
       - run
       - services
