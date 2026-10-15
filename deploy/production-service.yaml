@@ -19,8 +19,8 @@ spec:
         # Cloud Deploy/Skaffold replaces this with the release's image digest.
         - image: book-chat-image
           command: ['uvicorn']
-          args: ['main:app', '--host', '0.0.0.0', '--port', '8000']
-          ports:
+          args: ['main:app', '--host', '0.0.0.0', '--port', '8000', '--env-file', '/secrets/.env']
+
             - containerPort: 8000
           resources:
             limits:
