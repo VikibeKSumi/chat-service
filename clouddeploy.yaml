@@ -1,0 +1,32 @@
+apiVersion: deploy.cloud.google.com/v1
+kind: DeliveryPipeline
+metadata:
+  name: book-chat
+description: Staging validation followed by approved production promotion
+serialPipeline:
+  stages:
+    - targetId: staging
+      profiles: [staging]
+    - targetId: production
+      profiles: [production]
+---
+apiVersion: deploy.cloud.google.com/v1
+kind: Target
+metadata:
+  name: staging
+run:
+  location: projects/peaceful-signer-509915-j1/locations/asia-south1
+executionConfigs:
+  - usages: [RENDER, DEPLOY]
+    serviceAccount: the-app--executor@peaceful-signer-509915-j1.iam.gserviceaccount.com
+---
+apiVersion: deploy.cloud.google.com/v1
+kind: Target
+metadata:
+  name: production
+requireApproval: true
+run:
+  location: projects/peaceful-signer-509915-j1/locations/asia-south1
+executionConfigs:
+  - usages: [RENDER, DEPLOY]
+    serviceAccount: the-app--executor@peaceful-signer-509915-j1.iam.gserviceaccount.com
